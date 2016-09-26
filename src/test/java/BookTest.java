@@ -25,13 +25,6 @@ public class BookTest {
     assertTrue(book.equals(secondBook));
   }
 
-  // @Test
-  // public void save_bookSavesToDatabase_List() {
-  //   Book newBook = new Book("Harry Potter and the Drunken Warlock", "JK Rofling", "Drunken Wizardry", 2010);
-  //   newBook.save();
-  //   assertTrue(Book.all().get(0).equals(newBook));
-  // }
-
   @Test
   public void save_assignsIdToBook() {
     Book newBook = new Book("Curious George and the Exposed Wiring", "Satan", "Non-Fiction", 1966);

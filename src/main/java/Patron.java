@@ -20,4 +20,15 @@ public class Patron {
   public double getBac() {
     return bac;
   }
+
+  @Override
+  public boolean equals(Object otherPatron) {
+    if (!(otherPatron instanceof Patron)) {
+      return false;
+    } else {
+      Patron newPatron = (Patron) otherPatron;
+      return newPatron.getName().equals(this.getName()) && newPatron.getBac() == this.getBac();
+    }
+  }
+
 }

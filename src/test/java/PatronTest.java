@@ -18,5 +18,10 @@ public class PatronTest {
     assertTrue(patron instanceof Patron);
   }
 
-  
+  @Test
+  public void equals_returnsTrueIfPropertiesAreTheSame_true() {
+    Patron secondPatron = new Patron("Ryan", 0.3);
+    assertTrue(patron.equals(secondPatron));
+  }
+
 }
