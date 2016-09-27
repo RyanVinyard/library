@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="BookTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2016-09-27T21:10:16" hostname="epicodus-2.local" time="0.233">
+<testsuite name="BookTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2016-09-27T23:06:19" hostname="epicodus-2.local" time="3.283">
   <properties/>
-  <testcase name="find_returnsBookWithSameID_secondBook" classname="BookTest" time="0.121"/>
+  <testcase name="find_returnsBookWithSameID_secondBook" classname="BookTest" time="0.119"/>
   <testcase name="book_instantiatesBookObject_true" classname="BookTest" time="0.005"/>
   <testcase name="delete_removesEntryFromTable_null" classname="BookTest" time="0.019"/>
-  <testcase name="getTimeCheckedOut_recordsTimeOfCreationInDatabase" classname="BookTest" time="0.016"/>
+  <testcase name="keepBook_increaseDaysBookIsKept" classname="BookTest" time="0.009"/>
+  <testcase name="getTimeCheckedOut_recordsTimeOfCreationInDatabase" classname="BookTest" time="0.017"/>
+  <testcase name="isCheckedOut_confirmsBookIsCheckedOutIfDaysKeptIsMoreThan1_false" classname="BookTest" time="0.005"/>
   <testcase name="update_updatesAnyParameterInDatabaseForBook_string" classname="BookTest" time="0.019"/>
+  <testcase name="bookReturn_confirmsBookIsBackInStock_True" classname="BookTest" time="0.004"/>
   <testcase name="all_returnsAllBookObjectsFromDatabase_true" classname="BookTest" time="0.023"/>
-  <testcase name="equals_returnsTrueIfPropertiesAreTheSame_true" classname="BookTest" time="0.004"/>
-  <testcase name="daysKept_throwsExceptionIfDaysKeptIsAtMaxValue" classname="BookTest" time="0.004"/>
+  <testcase name="equals_returnsTrueIfPropertiesAreTheSame_true" classname="BookTest" time="0.005"/>
+  <testcase name="daysKept_throwsExceptionIfDaysKeptIsAtMaxValue" classname="BookTest" time="0.029"/>
   <testcase name="getPatronId_returnsPatronId_int" classname="BookTest" time="0.004"/>
+  <testcase name="startTimer_executesStartTimerMethod" classname="BookTest" time="3.01"/>
   <testcase name="save_assignsIdToBook" classname="BookTest" time="0.013"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

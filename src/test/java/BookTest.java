@@ -10,7 +10,6 @@ import java.text.DateFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 public class BookTest {
   Book book;
 
@@ -94,14 +93,31 @@ public class BookTest {
   }
 
   @Test
-  public void daysKeptTimer_executesKeepBookMethod() {
+  public void keepBook_increaseDaysBookIsKept() {
+    book.keepBook();
+    assertTrue(book.getDaysKept() > 1);
+  }
+
+  @Test
+  public void startTimer_executesStartTimerMethod() {
     int firstDaysKept = book.getDaysKept();
     book.startTimer();
-    try{
-      Thread.keepBook(1000);
+    try {
+      Thread.sleep(3000);
     } catch (InterruptedException exception) {}
       int secondDaysKept = book.getDaysKept();
       assertTrue(firstDaysKept < secondDaysKept);
+  }
+
+  @Test
+  public void isCheckedOut_confirmsBookIsCheckedOutIfDaysKeptIsMoreThan1_false(){
+    assertEquals(book.isCheckedOut(), false);
+  }
+
+  @Test
+  public void bookReturn_confirmsBookIsBackInStock_True() {
+    book.bookReturn();
+    assertTrue(book.getDaysKept() == 0);
   }
 
 

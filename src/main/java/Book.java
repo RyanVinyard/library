@@ -3,6 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.text.DateFormat;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Book {
   private String title;
@@ -13,8 +18,9 @@ public class Book {
   private Timestamp time_checked_out;
   private int id;
   private int daysKept;
+  private Timer timer;
 
-  public static final int MAX_DAYS_KEPT = 5;
+  public static final int MAX_DAYS_KEPT = 7;
 
   public Book(String title, String author, String subject, int copyright_year, int patron_id) {
     this.title = title;
@@ -22,7 +28,8 @@ public class Book {
     this.subject = subject;
     this.copyright_year = copyright_year;
     this.patron_id = patron_id;
-    daysKept = 0;
+    daysKept = 1;
+    timer = new Timer();
   }
 
   public int getPatronId() {
@@ -121,12 +128,53 @@ public class Book {
     if (daysKept >= MAX_DAYS_KEPT) {
       throw new UnsupportedOperationException("Your book is overdue!");
     }
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE books SET time_checked_out = now() WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+      }
     daysKept++;
   }
 
+  public void startTimer(){
+    Book currentBook = this;
+    TimerTask timerTask = new TimerTask(){
+      @Override
+      public void run() {
+        if (currentBook.isCheckedOut() == false){
+          cancel();
+        }
+        keepBook();
+      }
+    };
+    this.timer.schedule(timerTask, 0, 600);
+  }
 
+  public boolean isCheckedOut() {
+    if (daysKept > 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
+  public void bookReturn() {
+    if (daysKept == 0) {
+      throw new IllegalArgumentException("This book is not yet checked out!");
+    } else if (daysKept > 0 && daysKept <= MAX_DAYS_KEPT) {
+      daysKept = 0;
+      //run a book return bit here. Actually, maybe this is all that needs to be done.
+    } else {
+      daysKept = 0;
+      //run a late book method that emails or something idk
+    }
+
+  }
 }
+
+
+
 
 // String[] updateWords = {"title", "author", "subject", "copyright_year"};
 // public static update(String) {
