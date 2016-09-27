@@ -159,14 +159,16 @@ public class Book {
     }
   }
 
-  public void bookReturn() {
+  public String bookReturn() {
     if (daysKept == 0) {
       throw new IllegalArgumentException("This book is not yet checked out!");
     } else if (daysKept > 0 && daysKept <= MAX_DAYS_KEPT) {
       daysKept = 0;
+      return "GREAT JOB, THE GREAT JOB THAT EVER JOBBED BETTER THAN CHINA";
       //run a book return bit here. Actually, maybe this is all that needs to be done.
     } else {
       daysKept = 0;
+      return "YOU'RE LATE";
       //run a late book method that emails or something idk
     }
 
