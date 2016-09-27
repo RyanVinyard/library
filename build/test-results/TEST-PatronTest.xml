@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PatronTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2016-09-26T23:38:07" hostname="epicodus-12.local" time="0.009">
+<testsuite name="PatronTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2016-09-27T21:10:16" hostname="epicodus-2.local" time="0.07">
   <properties/>
+  <testcase name="save_savesObjectToDatabase_true" classname="PatronTest" time="0.016"/>
   <testcase name="patron_instantiatesPatronObject_true" classname="PatronTest" time="0.004"/>
+  <testcase name="all_returnsAllInstancesOfPatron_true" classname="PatronTest" time="0.024"/>
+  <testcase name="getId_returnsIdOfPatron_true" classname="PatronTest" time="0.009"/>
   <testcase name="equals_returnsTrueIfPropertiesAreTheSame_true" classname="PatronTest" time="0.004"/>
+  <testcase name="fetch_returnsPatronGivenId_patron" classname="PatronTest" time="0.012"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

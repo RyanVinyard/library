@@ -1,24 +1,32 @@
 import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class Book {
   private String title;
   private String author;
   private String subject;
   private int copyright_year;
-  private int patronId;
+  private int patron_id;
+  private Timestamp time_checked_out;
   private int id;
+  private int daysKept;
 
-  public Book(String title, String author, String subject, int copyright_year) {
+  public static final int MAX_DAYS_KEPT = 5;
+
+  public Book(String title, String author, String subject, int copyright_year, int patron_id) {
     this.title = title;
     this.author = author;
     this.subject = subject;
     this.copyright_year = copyright_year;
+    this.patron_id = patron_id;
+    daysKept = 0;
   }
 
-  public int patronId() {
-    return patronId;
+  public int getPatronId() {
+    return patron_id;
   }
 
   public String getTitle() {
@@ -41,6 +49,14 @@ public class Book {
     return id;
   }
 
+  public Timestamp getTimeCheckedOut() {
+    return time_checked_out;
+  }
+
+  public int getDaysKept() {
+    return daysKept;
+  }
+
   @Override
   public boolean equals(Object otherBook) {
     if(!(otherBook instanceof Book)) {
@@ -53,12 +69,13 @@ public class Book {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO books (title, author, subject, copyright_year) VALUES(:title, :author, :subject, :copyright_year)";
+      String sql = "INSERT INTO books (title, author, subject, copyright_year, patron_id, time_checked_out) VALUES(:title, :author, :subject, :copyright_year, :patron_id, now())";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("title", this.title)
         .addParameter("author", this.author)
         .addParameter("subject", this.subject)
         .addParameter("copyright_year", this.copyright_year)
+        .addParameter("patron_id", this.patron_id)
         .executeUpdate()
         .getKey();
       }
@@ -99,6 +116,14 @@ public class Book {
         .executeUpdate();
     }
   }
+
+  public void keepBook() {
+    if (daysKept >= MAX_DAYS_KEPT) {
+      throw new UnsupportedOperationException("Your book is overdue!");
+    }
+    daysKept++;
+  }
+
 
 
 }
